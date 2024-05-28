@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:28:09 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/05/28 16:38:05 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:24:54 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	parse_args(int argument)
 {
 	if (argument == 5)
-	{
 		return ;
-	}
 	else
 		print_error();
 }
