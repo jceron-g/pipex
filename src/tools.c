@@ -6,14 +6,14 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:34:42 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/05/28 16:44:13 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:56:32 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	print_error(void)
+void	print_error(char *str)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
 	exit(EXIT_FAILURE);
 }

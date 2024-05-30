@@ -6,11 +6,12 @@
 #    By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/28 15:54:56 by jceron-g          #+#    #+#              #
-#    Updated: 2024/05/28 16:38:51 by jceron-g         ###   ########.fr        #
+#    Updated: 2024/05/30 13:15:08 by jceron-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+NAME_B =
 USER = jceron-g
 CC = clang -g
 CFLAGS = -Wextra -Wall -Werror 
@@ -30,7 +31,7 @@ BLUE      = \033[34;1m
 CYAN      = \033[37;1m
 RED		  = \033[31;1m
 
-SRC_FILES = parse tools main
+SRC_FILES = parse tools main get_commands processes
 SRC_FILES_BONUS = 
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
