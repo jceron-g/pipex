@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:44:33 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/05/30 17:26:16 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:40:42 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ char	**get_path(char **envp)
 	return (splitted_path);
 }
 
-char	*get_command(char **envp, char *argv)
+char	*get_command(char **envp, char **argv)
 {
 	char	**path;
 	char	**command;
+	char	*actual_path;
 	char	*command_path;
 	int		i;
 
 	i = 0;
 	command_path = NULL;
 	path = get_path(envp);
-	command = ft_split(argv, ' ');
+	command = ft_split(argv[2], ' ');
 	while (path[i])
 	{
-		command_path = ft_strjoin(ft_strjoin(path[i], "/"), command[0]);
-		if (!access(command_path, X_OK))
+		actual_path = ft_strjoin(path[i], "/");
+		command_path = ft_strjoin(actual_path, command[0]);
+		free (actual_path);
+		if (access(command_path, F_OK | X_OK) == 0)
 			break ;
 		free(command_path);
 		command_path = NULL;
