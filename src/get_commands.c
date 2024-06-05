@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:44:33 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/04 12:40:42 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:51:15 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,23 @@ char	*get_command(char **envp, char **argv)
 	}
 	free_matrix(path);
 	return (command_path);
+}
+
+char	**fixed_commands(char **argv)
+{
+	int		quote_num;
+	char	**commands;
+
+	quote_num = count_char(*argv, '\'');
+	if (quote_num == 2)
+	{
+		commands = ft_split(*argv, '\'');
+		commands[0] = ft_strtrim(commands[0], " ");
+		return (commands);
+	}
+	else
+	{
+		commands = ft_split(*argv, ' ');
+		return (commands);
+	}
 }

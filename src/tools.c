@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:34:42 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/05/30 17:06:24 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:02:13 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void free_matrix(char **str)
+void	free_matrix(char **str)
 {
 	int	i;
 
@@ -29,4 +29,20 @@ void free_matrix(char **str)
 		i++;
 	}
 	free(str);
+}
+
+int	count_char(char *str, int c)
+{
+	int	i;
+	int	count_char;
+
+	i = 0;
+	count_char = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count_char++;
+		i++;
+	}
+	return (count_char);
 }
