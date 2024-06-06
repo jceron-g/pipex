@@ -6,12 +6,12 @@
 #    By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 14:59:39 by jceron-g          #+#    #+#              #
-#    Updated: 2024/05/24 16:04:15 by jceron-g         ###   ########.fr        #
+#    Updated: 2024/06/06 11:24:00 by jceron-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror 
 SOURCE = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		 ft_tolower.c ft_toupper.c ft_strchr.c ft_strlcat.c ft_strlcpy.c \

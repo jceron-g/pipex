@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:44:33 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/05 13:51:15 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:24:19 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_command(char **envp, char **argv)
 	i = 0;
 	command_path = NULL;
 	path = get_path(envp);
-	command = ft_split(argv[2], ' ');
+	command = ft_split(*argv, ' ');
 	while (path[i])
 	{
 		actual_path = ft_strjoin(path[i], "/");

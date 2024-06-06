@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:34:42 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/05 16:02:13 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:03:02 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(char *str)
 {
-	ft_putstr_fd(str, 2);
+	perror(str);
 	exit(EXIT_FAILURE);
 }
 
