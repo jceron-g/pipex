@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:26:55 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/06 12:38:34 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:20:32 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		count_char(char *str, int c);
 
 /*-------------COMMANDS-------------*/
 char	**get_path(char **envp);
-char	*get_command(char **envp, char **argv);
+char	*get_command(char **envp, char *argv);
 char 	**fixed_commands(char **argv);
 void	exec_commands(char *path, char **argv, char **envp);
 void	child_process(char **argv, int *fd, char **envp);

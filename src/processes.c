@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:06:31 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/06 13:59:16 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:25:14 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	exec_commands(char *path, char **argv, char **envp)
 	command = fixed_commands(argv);
 	if (!command)
 	{
+		free_matrix(command);
 		free(path);
-		print_error("Error splitting command");
+		print_error("Error finding command");
 	}
-	execve(path, command, envp);
 	if (execve(path, command, envp) == -1)
 	{
 		free_matrix(command);
@@ -63,17 +63,20 @@ void	child_process(char **argv, int *fd, char **envp)
 	int		infile_fd;
 	char	*path;
 
+	close(fd[0]);
 	infile_fd = open(argv[1], O_RDONLY);
 	if (infile_fd == -1)
-		print_error("Error opening the infile.");
+		print_error("Error: Infile can't be read");
 	dup2(infile_fd, 0);
 	dup2(fd[1], 1);
-	close(fd[0]);
-	path = get_command(envp, &argv[2]);
+	close(fd[1]);
+	path = get_command(envp, argv[2]);
 	if (!path)
-		print_error("Command not found");
+	{
+		print_error("Error: Command not found");
+		free(path);
+	}
 	exec_commands(path, &argv[2], envp);
-	exit(EXIT_SUCCESS);
 }
 
 void	child_process2(char **argv, int *fd, char **envp)
@@ -84,14 +87,16 @@ void	child_process2(char **argv, int *fd, char **envp)
 	close(fd[1]);
 	outfile_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile_fd == -1)
-		print_error("Could not open outfile_fd");
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
-	dup2(outfile_fd, STDOUT_FILENO);
+		print_error("Error: Outfile can't be opened");
+	dup2(outfile_fd, 1);
 	close(outfile_fd);
-	path = get_command(envp, &argv[3]);
+	dup2(fd[0], 0);
+	close(fd[0]);
+	path = get_command(envp, argv[3]);
 	if (!path)
+	{
 		print_error("Command not found");
+		free(path);
+	}
 	exec_commands(path, &argv[3], envp);
-	exit(EXIT_SUCCESS);
 }

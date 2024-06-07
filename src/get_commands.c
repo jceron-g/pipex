@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:44:33 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/06 13:24:19 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:19:57 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ char	**get_path(char **envp)
 		envp++;
 	}
 	if (!complete_path)
+	{
 		print_error("Error finding the variable in envp");
+		free(complete_path);
+	}
 	splitted_path = ft_split(complete_path, ':');
 	return (splitted_path);
 }
 
-char	*get_command(char **envp, char **argv)
+char	*get_command(char **envp, char *argv)
 {
 	char	**path;
 	char	**command;
@@ -44,7 +47,7 @@ char	*get_command(char **envp, char **argv)
 	i = 0;
 	command_path = NULL;
 	path = get_path(envp);
-	command = ft_split(*argv, ' ');
+	command = ft_split(argv, ' ');
 	while (path[i])
 	{
 		actual_path = ft_strjoin(path[i], "/");
@@ -53,7 +56,6 @@ char	*get_command(char **envp, char **argv)
 		if (access(command_path, F_OK | X_OK) == 0)
 			break ;
 		free(command_path);
-		command_path = NULL;
 		i++;
 	}
 	free_matrix(path);
