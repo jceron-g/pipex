@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:37:29 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/07 14:40:15 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:06:10 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	int fd[2];
+	int	fd[2];
 
 	parse_args(argc, argv);
 	pipe(fd);

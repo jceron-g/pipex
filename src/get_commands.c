@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:44:33 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/07 16:19:57 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:56:58 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*get_command(char **envp, char *argv)
 		i++;
 	}
 	free_matrix(path);
+	free_matrix(command);
 	return (command_path);
 }
 
