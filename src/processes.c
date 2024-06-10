@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:06:31 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/10 13:35:41 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:05:14 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	parent_process(char **argv, int *fd, char **envp)
 	else
 	{
 		close(fd[1]);
-		waitpid(pid_c1, 0, 0);
 		pid_c2 = fork();
 		if (pid_c2 == -1)
 			print_error("Error: Child process two failed\n");
@@ -53,6 +52,7 @@ void	parent_process(char **argv, int *fd, char **envp)
 		else
 		{
 			close(fd[0]);
+			waitpid(pid_c1, 0, 0);
 			waitpid(pid_c2, 0, 0);
 		}
 	}
