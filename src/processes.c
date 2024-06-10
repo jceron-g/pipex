@@ -6,28 +6,28 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:06:31 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/10 10:11:36 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:35:41 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	exec_commands(char *path, char **argv, char **envp)
+void	exec_commands(char *path, char *str, char **envp)
 {
 	char	**command;
 
-	command = fixed_commands(argv);
+	command = fixed_commands(str);
 	if (!command)
 	{
 		free_matrix(command);
 		free(path);
-		print_error("Error finding command");
+		print_error("Error finding command\n");
 	}
 	if (execve(path, command, envp) == -1)
 	{
 		free_matrix(command);
 		free(path);
-		print_error("Execution failed");
+		print_error("Execution failed\n");
 	}
 }
 
@@ -38,7 +38,7 @@ void	parent_process(char **argv, int *fd, char **envp)
 
 	pid_c1 = fork();
 	if (pid_c1 == -1)
-		print_error("Error, fork failed");
+		print_error("Error: Child process one failed\n");
 	else if (pid_c1 == 0)
 		child_process(argv, fd, envp);
 	else
@@ -47,7 +47,7 @@ void	parent_process(char **argv, int *fd, char **envp)
 		waitpid(pid_c1, 0, 0);
 		pid_c2 = fork();
 		if (pid_c2 == -1)
-			print_error("Could not fork second time");
+			print_error("Error: Child process two failed\n");
 		else if (pid_c2 == 0)
 			child_process2(argv, fd, envp);
 		else
@@ -76,7 +76,7 @@ void	child_process(char **argv, int *fd, char **envp)
 		print_error("Error: Command not found\n");
 		free(path);
 	}
-	exec_commands(path, &argv[2], envp);
+	exec_commands(path, argv[2], envp);
 }
 
 void	child_process2(char **argv, int *fd, char **envp)
@@ -95,8 +95,8 @@ void	child_process2(char **argv, int *fd, char **envp)
 	path = get_command(envp, argv[3]);
 	if (!path)
 	{
-		print_error("Command not found\n");
+		print_error("Error: Command not found\n");
 		free(path);
 	}
-	exec_commands(path, &argv[3], envp);
+	exec_commands(path, argv[3], envp);
 }

@@ -6,7 +6,7 @@
 /*   By: jceron-g <jceron-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:44:33 by jceron-g          #+#    #+#             */
-/*   Updated: 2024/06/10 09:56:58 by jceron-g         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:36:22 by jceron-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ char	**get_path(char **envp)
 		envp++;
 	}
 	if (!complete_path)
-	{
 		print_error("Error finding the variable in envp");
-		free(complete_path);
-	}
 	splitted_path = ft_split(complete_path, ':');
 	return (splitted_path);
 }
@@ -56,28 +53,29 @@ char	*get_command(char **envp, char *argv)
 		if (access(command_path, F_OK | X_OK) == 0)
 			break ;
 		free(command_path);
+		command_path = NULL;
 		i++;
 	}
-	free_matrix(path);
 	free_matrix(command);
+	free_matrix(path);
 	return (command_path);
 }
 
-char	**fixed_commands(char **argv)
+char	**fixed_commands(char *str)
 {
 	int		quote_num;
 	char	**commands;
 
-	quote_num = count_char(*argv, '\'');
+	quote_num = count_char(str, '\'');
 	if (quote_num == 2)
 	{
-		commands = ft_split(*argv, '\'');
+		commands = ft_split(str, '\'');
 		commands[0] = ft_strtrim(commands[0], " ");
 		return (commands);
 	}
 	else
 	{
-		commands = ft_split(*argv, ' ');
+		commands = ft_split(str, ' ');
 		return (commands);
 	}
 }
